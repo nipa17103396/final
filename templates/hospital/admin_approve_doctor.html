@@ -20,10 +20,7 @@
     }
   </style>
 </head>
-<!--
-written By : sumit kumar
-facebook : fb.com/sumit.luv
--->
+
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -37,6 +34,8 @@ facebook : fb.com/sumit.luv
           <th>Mobile</th>
           <th>Address</th>
           <th>Department</th>
+          <th>NID</th>
+          <th>Licence</th>
           <th>Approve</th>
           <th>Reject</th>
         </tr>
@@ -48,6 +47,8 @@ facebook : fb.com/sumit.luv
         <td>{{d.mobile}}</td>
         <td>{{d.address}}</td>
         <td>{{d.department}}</td>
+        <td> <img src="{% static d.nid.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td> <img src="{% static d.licence.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
         <td><a class="btn btn-primary btn-xs" href="{% url 'approve-doctor' d.id  %}"><span class="glyphicon glyphicon-ok"></span></a></td>
         <td><a class="btn btn-danger btn-xs" href="{% url 'reject-doctor' d.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
       </tr>
@@ -57,10 +58,6 @@ facebook : fb.com/sumit.luv
 
 
 </div>
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
+
 
 {% endblock content %}

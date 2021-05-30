@@ -25,7 +25,7 @@ class DoctorUserForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
-        fields=['address','mobile','department','status','profile_pic']
+        fields=['address','mobile','department','status','profile_pic','nid','licence']
 
 
 
@@ -71,6 +71,4 @@ class ContactusForm(forms.Form):
 
 
 
-#Developed By : sumit kumar
-#facebook : fb.com/sumit.luv
-#Youtube :youtube.com/lazycoders
+
