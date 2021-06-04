@@ -8,6 +8,19 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.conf import settings
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Create your views here.
 def home_view(request):
     if request.user.is_authenticated:
@@ -176,6 +189,13 @@ def admin_doctor_view(request):
 def admin_view_doctor_view(request):
     doctors=models.Doctor.objects.all().filter(status=True)
     return render(request,'hospital/admin_view_doctor.html',{'doctors':doctors})
+
+
+def doctor_cat(request):
+
+    doctors=models.Doctor.objects.all().filter(status=True)
+
+    return render(request,'hospital/doctor_category.html', {'doctors':doctors})
 
 
 
@@ -847,6 +867,11 @@ def patient_discharge_view(request):
 #---------------------------------------------------------------------------------
 def aboutus_view(request):
     return render(request,'hospital/aboutus.html')
+
+
+
+
+
 
 def contactus_view(request):
     sub = forms.ContactusForm()
