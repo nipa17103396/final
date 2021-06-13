@@ -70,6 +70,13 @@
             <div class="form-group">
               {% render_field doctorForm.department class="form-control" placeholder="Department" %}
             </div>
+            <div class="form-group">
+              {% render_field doctorForm.qualification class="form-control" placeholder="Qualifications" %}
+            </div>
+            <div class="form-group">
+              <lable>NID</lable>
+              {% render_field doctorForm.nid class="form-control" placeholder="nid" %}
+            </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
@@ -82,7 +89,12 @@
               {% render_field doctorForm.address class="form-control" placeholder="Address" %}
             </div>
             <div class="form-group">
+              <lable>Profile Pic</lable>
               {% render_field doctorForm.profile_pic class="form-control" placeholder="Profile Picture" %}
+            </div>
+            <div class="form-group">
+              <lable>Licence</lable>
+              {% render_field doctorForm.licence class="form-control" placeholder="Licence" %}
             </div>
           </div>
         </div>

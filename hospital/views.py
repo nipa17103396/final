@@ -42,6 +42,10 @@ def doctorclick_view(request):
     return render(request,'hospital/doctorclick.html')
 
 
+def department(request):
+    return render(request, 'hospital/department.html')
+
+
 #for showing signup/login button for patient
 def patientclick_view(request):
     if request.user.is_authenticated:
@@ -191,11 +195,18 @@ def admin_view_doctor_view(request):
     return render(request,'hospital/admin_view_doctor.html',{'doctors':doctors})
 
 
-def doctor_cat(request):
+def doctor_cat(request, name):
+
+    doctors=models.Doctor.objects.all().filter(status=True, department=name)
+
+    return render(request,'hospital/doctor_category.html', {'doctors':doctors})
+
+
+def prescription(request):
 
     doctors=models.Doctor.objects.all().filter(status=True)
 
-    return render(request,'hospital/doctor_category.html', {'doctors':doctors})
+    return render(request,'hospital/prescription.html', {'doctors':doctors})
 
 
 

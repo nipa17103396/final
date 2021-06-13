@@ -17,12 +17,13 @@ urlpatterns = [
 
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
-    path('doctor_cat', views.doctor_cat),
+    # path('doctor_cat', views.doctor_cat),
 
 
 
     path('adminclick', views.adminclick_view),
-    path('doctorclick', views.doctorclick_view),
+    path('doctorclick', views.doctorclick_view, name="doctorclick"),
+    path('department', views.department, name="department"),
     path('patientclick', views.patientclick_view),
 
     
@@ -79,6 +80,7 @@ urlpatterns = [
 urlpatterns +=[
     path('doctor-dashboard', views.doctor_dashboard_view,name='doctor-dashboard'),
 
+    path('doctor_cat/<name>', views.doctor_cat, name='doctor_cat'),
     path('doctor-patient', views.doctor_patient_view,name='doctor-patient'),
     path('doctor-view-patient', views.doctor_view_patient_view,name='doctor-view-patient'),
     path('doctor-view-discharge-patient',views.doctor_view_discharge_patient_view,name='doctor-view-discharge-patient'),
@@ -100,6 +102,8 @@ urlpatterns +=[
     path('patient-book-appointment', views.patient_book_appointment_view,name='patient-book-appointment'),
     path('patient-view-appointment', views.patient_view_appointment_view,name='patient-view-appointment'),
     path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
+
+     path('prescription', views.prescription),
 
 ]
 
