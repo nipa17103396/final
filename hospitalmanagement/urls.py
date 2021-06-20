@@ -103,7 +103,7 @@ urlpatterns +=[
     path('patient-view-appointment', views.patient_view_appointment_view,name='patient-view-appointment'),
     path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
 
-     path('prescription', views.prescription),
+     path('prescription/<int:pk>', views.prescription,name='prescription'),
 
 ]
 

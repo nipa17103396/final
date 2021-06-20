@@ -85,4 +85,16 @@ class PatientDischargeDetails(models.Model):
     total=models.PositiveIntegerField(null=False)
 
 
+class PatientPrescription(models.Model):
 
+    patientId=models.PositiveIntegerField(null=True)
+    patientName=models.CharField(max_length=40)
+    assignedDoctorName=models.CharField(max_length=40)
+    address = models.CharField(max_length=40)
+    mobile = models.CharField(max_length=20,null=True)
+    symptoms = models.CharField(max_length=100,null=True)
+
+    
+    releaseDate=models.DateField(null=False)
+    medicine=models.TextField(max_length=500, null=True)
+    test=models.TextField(max_length=200, null=True)

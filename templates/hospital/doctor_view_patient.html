@@ -46,7 +46,7 @@
         <td>{{p.symptoms}}</td>
         <td>{{p.mobile}}</td>
         <td>{{p.address}}</td>
-        <td>{{p.prescription}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'prescription'  p.id  %}"><span class="glyphicon glyphicon-log-out"></span></a></td>>
         
       </tr>
       {% endfor %}

@@ -202,11 +202,24 @@ def doctor_cat(request, name):
     return render(request,'hospital/doctor_category.html', {'doctors':doctors})
 
 
-def prescription(request):
+def prescription(request,pk):
 
-    doctors=models.Doctor.objects.all().filter(status=True)
+    patient=models.Patient.objects.get(id=pk)
+    days=(date.today()-patient.admitDate) #2 days, 0:00:00
+    assignedDoctor=models.User.objects.all().filter(id=patient.assignedDoctorId)
 
-    return render(request,'hospital/prescription.html', {'doctors':doctors})
+    patientDict={
+        'patientId':pk,
+        'name':patient.get_name,
+        'mobile':patient.mobile,
+        'address':patient.address,
+        'symptoms':patient.symptoms,
+        'todayDate':date.today(),
+        'assignedDoctorName':assignedDoctor[0].first_name,
+        
+    }
+
+    return render(request,'hospital/prescription.html', context=patientDict)
 
 
 
