@@ -104,6 +104,8 @@ urlpatterns +=[
     path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
 
      path('prescription/<int:pk>', views.prescription,name='prescription'),
+     path('prescription_download-pdf/<int:pk>', views.prescription_download_pdf_view,name='prescription_download-pdf'),
+    
 
 ]
 

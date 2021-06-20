@@ -202,24 +202,6 @@ def doctor_cat(request, name):
     return render(request,'hospital/doctor_category.html', {'doctors':doctors})
 
 
-def prescription(request,pk):
-
-    patient=models.Patient.objects.get(id=pk)
-    days=(date.today()-patient.admitDate) #2 days, 0:00:00
-    assignedDoctor=models.User.objects.all().filter(id=patient.assignedDoctorId)
-
-    patientDict={
-        'patientId':pk,
-        'name':patient.get_name,
-        'mobile':patient.mobile,
-        'address':patient.address,
-        'symptoms':patient.symptoms,
-        'todayDate':date.today(),
-        'assignedDoctorName':assignedDoctor[0].first_name,
-        
-    }
-
-    return render(request,'hospital/prescription.html', context=patientDict)
 
 
 
@@ -493,6 +475,50 @@ def discharge_patient_view(request,pk):
 
 
 
+def prescription(request,pk):
+
+    patient=models.Patient.objects.get(id=pk)
+    days=(date.today()-patient.admitDate) #2 days, 0:00:00
+    assignedDoctor=models.User.objects.all().filter(id=patient.assignedDoctorId)
+
+    patientDict={
+        'patientId':pk,
+        'name':patient.get_name,
+        'mobile':patient.mobile,
+        'address':patient.address,
+        'symptoms':patient.symptoms,
+        'todayDate':date.today(),
+        'assignedDoctorName':assignedDoctor[0].first_name,
+        
+    }
+
+    if request.method == 'POST':
+        feeDict ={
+            
+            'medicine':request.POST['medicine'],
+            'test' : request.POST['test'],
+            
+        }
+        patientDict.update(feeDict)
+        #for updating to database PatientPrescription (pP)
+        pDD=models.PatientPrescription()
+        pDD.patientId=pk
+        pDD.patientName=patient.get_name
+        pDD.assignedDoctorName=assignedDoctor[0].first_name
+        pDD.address=patient.address
+        pDD.mobile=patient.mobile
+        pDD.symptoms=patient.symptoms        
+        pDD.releaseDate=date.today()       
+        pDD.medicine=(request.POST['medicine'])       
+        pDD.test=(request.POST['test'])
+        pDD.save()
+        return render(request,'hospital/prescription_details.html',context=patientDict)
+
+    return render(request,'hospital/prescription.html', context=patientDict)
+
+
+
+
 #--------------for discharge patient bill (pdf) download and printing
 import io
 from xhtml2pdf import pisa
@@ -530,6 +556,38 @@ def download_pdf_view(request,pk):
         'total':dischargeDetails[0].total,
     }
     return render_to_pdf('hospital/download_bill.html',dict)
+
+
+
+
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = io.BytesIO()
+    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return
+
+
+
+def prescription_download_pdf_view(request,pk):
+    dischargeDetails=models.PatientPrescription.objects.all().filter(patientId=pk).order_by('-id')[:1]
+    dict={
+        'patientName':dischargeDetails[0].patientName,
+        'assignedDoctorName':dischargeDetails[0].assignedDoctorName,
+        'address':dischargeDetails[0].address,
+        'mobile':dischargeDetails[0].mobile,
+        'symptoms':dischargeDetails[0].symptoms,
+        
+        'releaseDate':dischargeDetails[0].releaseDate,
+        
+        'medicine':dischargeDetails[0].medicine,
+        'test':dischargeDetails[0].test,
+        
+    }
+    return render_to_pdf('hospital/download_prescription.html',dict)
 
 
 
