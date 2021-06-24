@@ -103,9 +103,10 @@ urlpatterns +=[
     path('patient-view-appointment', views.patient_view_appointment_view,name='patient-view-appointment'),
     path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
 
-     path('prescription/<int:pk>', views.prescription,name='prescription'),
-     path('prescription_download-pdf/<int:pk>', views.prescription_download_pdf_view,name='prescription_download-pdf'),
-    
+    path('prescription/<int:pk>', views.prescription,name='prescription'),
+    path('prescription_download-pdf/<int:pk>', views.prescription_download_pdf_view,name='prescription_download-pdf'),
+    path('patient_prescription', views.patient_prescription,name='patient_prescription'), 
+    path('patient_prescription_download_pdf/<int:pk>', views.patient_prescription_download_pdf_view,name='patient_prescription_download_pdf'),  
 
 ]
 

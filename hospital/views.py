@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.conf import settings
+from .models import PatientPrescription
 
 
 
@@ -516,7 +517,11 @@ def prescription(request,pk):
 
     return render(request,'hospital/prescription.html', context=patientDict)
 
+def patient_prescription(request):
 
+    q=PatientPrescription.objects.all()
+    
+    return render(request, 'hospital/patient_prescription.html',{"data":q})
 
 
 #--------------for discharge patient bill (pdf) download and printing
@@ -588,6 +593,27 @@ def prescription_download_pdf_view(request,pk):
         
     }
     return render_to_pdf('hospital/download_prescription.html',dict)
+
+
+def patient_prescription_download_pdf_view(request,pk):
+    dischargeDetails=models.PatientPrescription.objects.all().filter(patientId=pk).order_by('-id')[:1]
+    dict={
+        'patientName':dischargeDetails[0].patientName,
+        'assignedDoctorName':dischargeDetails[0].assignedDoctorName,
+        'address':dischargeDetails[0].address,
+        'mobile':dischargeDetails[0].mobile,
+        'symptoms':dischargeDetails[0].symptoms,
+        
+        'releaseDate':dischargeDetails[0].releaseDate,
+        
+        'medicine':dischargeDetails[0].medicine,
+        'test':dischargeDetails[0].test,
+        
+    }
+    return render_to_pdf('hospital/patient_prescription_download_pdf.html',dict)
+
+
+
 
 
 
