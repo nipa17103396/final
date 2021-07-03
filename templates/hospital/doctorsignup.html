@@ -74,20 +74,20 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+                {% render_field userForm.first_name class="form-control" placeholder="First Name" required="True" %}
               </div>
               <div class="form-group">
-                {% render_field userForm.username class="form-control" placeholder="Username" %}
+                {% render_field userForm.username class="form-control" placeholder="Username" required="True" %}
               </div>
               <div class="form-group">
-                {% render_field doctorForm.department class="form-control" placeholder="Department" %}
+                {% render_field doctorForm.department class="form-control" placeholder="Department" required="True" %}
               </div>
               <div class="form-group">
-                {% render_field doctorForm.address class="form-control" placeholder="Address" %}
+                {% render_field doctorForm.address class="form-control" placeholder="Address" required="True" %}
               </div>
 
               <div class="form-group">
-                {% render_field doctorForm.qualification class="form-control" placeholder="Qualification" %}
+                {% render_field doctorForm.qualification class="form-control" placeholder="Qualification" required="True" %}
               </div>
 
              
@@ -100,13 +100,13 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+                {% render_field userForm.last_name class="form-control" placeholder="Last Name" required="True" %}
               </div>
               <div class="form-group">
-                {% render_field userForm.password class="form-control" placeholder="Password" %}
+                {% render_field userForm.password class="form-control" placeholder="Password" required="True" %}
               </div>
               <div class="form-group">
-                {% render_field doctorForm.mobile class="form-control"  placeholder="Mobile" %}
+                {% render_field doctorForm.mobile class="form-control"  placeholder="Mobile" required="True"   %}
               </div>
 
               <div class="form-group">

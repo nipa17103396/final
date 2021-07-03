@@ -9,6 +9,7 @@ department=[
     ('Allergists/Immunologists','Allergists/Immunologists'),
     ('Anesthesiologists','Anesthesiologists'),
     ('Colon and Rectal Surgeons','Colon and Rectal Surgeons'),
+    
 ]
 
 
@@ -17,7 +18,7 @@ class Doctor(models.Model):
     profile_pic= models.ImageField(upload_to='profile_pic/DoctorProfilePic/',null=True,blank=True)
     address = models.CharField(max_length=40)
     qualification=models.CharField(max_length=100, null=True,blank=True)
-    mobile = models.CharField(max_length=20,null=True)
+    mobile = models.PositiveIntegerField(null=True)
     department= models.CharField(max_length=50,choices=department,default='Cardiologist')
     status=models.BooleanField(default=False)
     nid=models.ImageField(upload_to='profile_pic/nid/',null=True,blank=True)
@@ -40,7 +41,7 @@ class Patient(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     profile_pic= models.ImageField(upload_to='profile_pic/PatientProfilePic/',null=True,blank=True)
     address = models.CharField(max_length=40)
-    mobile = models.CharField(max_length=20,null=False)
+    mobile = models.PositiveIntegerField(max_length=11,null=False)
     symptoms = models.CharField(max_length=100,null=False)
     assignedDoctorId = models.PositiveIntegerField(null=True)
     admitDate=models.DateField(auto_now=True)
